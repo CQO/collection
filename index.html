@@ -297,6 +297,7 @@
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/prefixfree.min.js"></script>
     <script>
+<<<<<<< HEAD
 
         $(function () {
             let context = {},isTouch=false,start;
@@ -313,10 +314,36 @@
                     return (window.requestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function (callback) {
                         window.setTimeout(callback, 1000 / 60);
                     });
+=======
+        let initX,moveX,X = 0,objX = 0;
+        var start;
+        $(".card_item").on("touchstart",function (event) {
+            start = new Date().getTime();
+        });
+        $(".card_item").on("touchend",function (event) {
+            var end = new Date().getTime();//接受时间
+            console.log ((end - start)+"ms");//返回函数执行需要时间
+        });
+        $(function () {
+
+            function waterRipple(dom,color) {
+                let centerX = 0, centerY = 0, context = {}, element = {}, radius = 0;
+                const requestAnimFrame = function () {
+                    return (
+                            window.requestAnimationFrame       ||
+                            window.mozRequestAnimationFrame    ||
+                            window.oRequestAnimationFrame      ||
+                            window.msRequestAnimationFrame     ||
+                            function (callback) {
+                                window.setTimeout(callback, 1000 / 60);
+                            }
+                    );
+>>>>>>> origin/master
                 } ();
                 const draw = function () {
                     context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
                     context.fillStyle = color;
+<<<<<<< HEAD
                     context.fill();radius += increment ;
                     if (radius < element.width&&isTouch) {
                         requestAnimFrame(draw);
@@ -334,6 +361,20 @@
                     centerX = event.targetTouches[0].clientX-$(element).offset().left;
                     centerY = event.targetTouches[0].clientY-$(element).offset().top;
                     isTouch=true;
+=======
+                    context.fill();
+                    radius += 4 ;
+                    if (radius < element.width) {
+                        requestAnimFrame(draw);
+                    }
+                };
+                const press = function (event) {
+                    element = event.toElement;
+                    context = element.getContext('2d');
+                    radius = 0;
+                    centerX = event.offsetX;
+                    centerY = event.offsetY;
+>>>>>>> origin/master
                     context.clearRect(0, 0, element.width, element.height);
                     context.beginPath();
                     draw();
@@ -341,6 +382,7 @@
                 const containers = Array.prototype.slice.call(document.getElementsByClassName(dom));
                 for (var i = 0; i < containers.length; i += 1) {
                     let canvas = document.createElement('canvas');
+<<<<<<< HEAD
                     canvas.addEventListener('touchstart', press, false);
                     canvas.addEventListener('touchend', touchEnd, false);
                     containers[i].appendChild(canvas);
@@ -357,6 +399,15 @@
                 }
                 this.style.display="none";
             })
+=======
+                    canvas.addEventListener('click', press, false);
+                    containers[i].appendChild(canvas);
+                    canvas.width  = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
+                }
+            }
+            waterRipple("card_item_body","#000206");
+>>>>>>> origin/master
         })
     </script>
 </body>
