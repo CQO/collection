@@ -9,6 +9,9 @@
 </head>
 <style>
     html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+    body{
+        Font-family: Helvetica, Tahoma, Arial, STXihei, “华文细黑”, “Microsoft YaHei”, “微软雅黑”, sans-serif;
+    }
     section{
         background-color: #f1eef5;
         width: 100%;
@@ -37,6 +40,7 @@
         background-color: white;
         margin: 4px;
         border: 1px solid #c5c5b8;
+        transition: min-height 0.5s;
     }
     .card_item_header{
         margin: 0 5px;
@@ -61,11 +65,10 @@
         position: relative;
         right: 5px;
         top: 14px;
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
     .card_item_body{
         margin: 5px;
-        padding-bottom: 5px;
         position: relative;
     }
     .card_item_body img{
@@ -83,9 +86,10 @@
         color: #b3b366;
         background-color: #eefbfb;
     }
-    .card_item_body .file .file_zip{
+    .card_item_body .file .file_box{
         border-right: 3px solid #a4c8ce;
         padding: 5px;
+        padding-right: 10px;
         font-size: 4rem;
         position: relative;
         top: 3px;
@@ -93,30 +97,35 @@
     }
     .card_item_body .file .file_title{
         float: left;
-        line-height: 1.5rem;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         position: relative;
-        top: 10px;
+        top: 0;
         left: 15px;
-        color: #343434;
+        color: #4a4a4a;
+        line-height: 80px;
         font-weight: bold;
     }
     .card_item_body .file .file_size{
-        float: left;
-        line-height: 1.2rem;
-        font-size: 1.2rem;
-        position: relative;
-        top: 55px;
-        right: 118px;
+        float: right;
+        line-height: 1.0rem;
+        font-size: 1.0rem;
+        position: absolute;
+        top: 62px;
+        right: 0;
         color: #d0c6c6;
+        z-index: 1;
+        width: 70px;
+        text-align: center;
     }
     .card_item_body .file .fa-cloud-download{
         font-size: 3rem;
         line-height: 3rem;
-        float: right;
         color: #a4d6d6;
-        position: relative;
-        top: 20px;
+        float: right;
+        position: absolute;
+        top: 10px;
+        right: 8px;
+        z-index: 9;
     }
     .card_item_body .text {
         line-height: 1.2em;
@@ -126,19 +135,50 @@
         padding: 8px;
     }
     .card_item canvas {
-        opacity: 0.25;
+        opacity: 0.6;
         position: absolute;
+        width :100%;
+        height :100%;
         top: 0;
         left: 0;
     }
-    .clear{
-        clear: both;
+    .cover{
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.41);
+        position: absolute;
+        z-index: 10;
+        display: none;
+    }
+    .clear{clear: both;}
+    .operation , .cancel{
+        background-color: white;
+        bottom: 0;
+        border-radius: 5px;
+        margin: 12px;
+    }
+    .operation li, .cancel li{
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 1.3rem;
+    }
+    .operation li:first-child{
+        border-bottom: 1px solid #dcdbde;
+    }
+    .menu{
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+    .delate{
+        color: red;
     }
 </style>
 <body>
     <section id="box" class="box">
         <ul class="card">
-            <li class="card_item">
+            <li id="item1" class="card_item">
                 <div class="card_item_header">
                     <img src="img/1.png">
                     <span class="name">网易</span>
@@ -149,7 +189,7 @@
                     <div class="clear"></div>
                 </div>
             </li>
-            <li class="card_item">
+            <li id="item2" class="card_item">
                 <div class="card_item_header">
                     <img src="img/1.png">
                     <span class="name">网易</span>
@@ -158,14 +198,30 @@
                 </div>
                 <div class="card_item_body">
                     <div class="file">
-                        <div class="fa fa-file-archive-o file_zip"></div>
+                        <div class="fa fa-file-archive-o file_box"></div>
                         <span class="file_title">测试文件.zip</span>
                         <span class="file_size">325.3KB</span>
                         <div class="fa fa-cloud-download"></div>
                     </div>
                 </div>
             </li>
-            <li class="card_item">
+            <li id="item3" class="card_item">
+                <div class="card_item_header">
+                    <img src="img/1.png">
+                    <span class="name">网易</span>
+                    <span class="time">16/03/18</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="card_item_body">
+                    <div class="file">
+                        <div class="fa fa-file-image-o file_box"></div>
+                        <span class="file_title">测试图片.png</span>
+                        <span class="file_size">1.5MB</span>
+                        <div class="fa fa-cloud-download"></div>
+                    </div>
+                </div>
+            </li>
+            <li id="item4" class="card_item">
                 <div class="card_item_header">
                     <img src="img/1.png">
                     <span class="name">网易</span>
@@ -179,79 +235,128 @@
                     <div class="clear"></div>
                 </div>
             </li>
+            <li id="item5" class="card_item">
+                <div class="card_item_header">
+                    <img src="img/1.png">
+                    <span class="name">网易</span>
+                    <span class="time">16/03/18</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="card_item_body">
+                    <div class="file">
+                        <div class="fa fa-file-word-o file_box"></div>
+                        <span class="file_title">测试文本.txt</span>
+                        <span class="file_size">50KB</span>
+                        <div class="fa fa-cloud-download"></div>
+                    </div>
+                </div>
+            </li>
+            <li id="item6" class="card_item">
+                <div class="card_item_header">
+                    <img src="img/1.png">
+                    <span class="name">网易</span>
+                    <span class="time">16/03/18</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="card_item_body">
+                    <div class="text">
+                        HTML 4.0 的新特性之一是有能力使 HTML 事件触发浏览器中的动作（action），比如当用户点击某个 HTML 元素时启动一段 JavaScript。下面是一个属性列表，这些属性可插入 HTML 标签来定义事件动作。
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </li>
+            <li id="item7" class="card_item">
+                <div class="card_item_header">
+                    <img src="img/1.png">
+                    <span class="name">网易</span>
+                    <span class="time">16/03/18</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="card_item_body">
+                    <div class="text">
+                        .p1{ word-break:break-all; width:150px;}/*只对英文起作用，以字母作为换行依据*/
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </li>
         </ul>
     </section>
+    <footer>
+        <div class="cover">
+            <div class="menu">
+                <ul class="operation">
+                    <li>转发</li>
+                    <li class="delate">删除</li>
+                </ul>
+                <ul class="cancel">
+                    <li>取消</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/prefixfree.min.js"></script>
     <script>
-        let initX,moveX,X = 0,objX = 0;
-        var start;
-        $(".card_item").on("touchstart",function (event) {
-            start = new Date().getTime();
-        });
-        $(".card_item").on("touchend",function (event) {
-            var end = new Date().getTime();//接受时间
 
-            console.log ((end - start)+"ms");//返回函数执行需要时间
-        });
         $(function () {
-            var canvas = {},
-                    centerX = 0,
-                    centerY = 0,
-                    color = '',
-                    containers = document.getElementsByClassName('card_item_body');
-            context = {},
-                    element = {},
-                    radius = 0,
-
-                    requestAnimFrame = function () {
-                        return (
-                                window.requestAnimationFrame       ||
-                                window.mozRequestAnimationFrame    ||
-                                window.oRequestAnimationFrame      ||
-                                window.msRequestAnimationFrame     ||
-                                function (callback) {
-                                    window.setTimeout(callback, 1000 / 60);
-                                }
-                        );
-                    } (),
-
-                    init = function () {
-                        containers = Array.prototype.slice.call(containers);
-                        for (var i = 0; i < containers.length; i += 1) {
-                            canvas = document.createElement('canvas');
-                            canvas.addEventListener('click', press, false);
-                            containers[i].appendChild(canvas);
-                            canvas.style.width ='100%';
-                            canvas.style.height='100%';
-                            canvas.width  = canvas.offsetWidth;
-                            canvas.height = canvas.offsetHeight;
-                        }
-                    },
-
-                    press = function (event) {
-                        color = event.toElement.parentElement.dataset.color;
-                        element = event.toElement;
-                        context = element.getContext('2d');
-                        radius = 0;
-                        centerX = event.offsetX;
-                        centerY = event.offsetY;
+            let context = {},isTouch=false,start;
+            function touchEnd() {
+                var end = new Date().getTime();//接受时间
+                isTouch=false;
+                if(end - start>1000){
+                    $(".cover").css("display","block");
+                }
+            }
+            const waterRipple=function (dom,color,increment) {
+                let centerX = 0, centerY = 0,  element = {}, radius = 0;
+                const requestAnimFrame = function () {
+                    return (window.requestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function (callback) {
+                        window.setTimeout(callback, 1000 / 60);
+                    });
+                } ();
+                const draw = function () {
+                    context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                    context.fillStyle = color;
+                    context.fill();radius += increment ;
+                    if (radius < element.width&&isTouch) {
+                        requestAnimFrame(draw);
+                    }
+                    else {
                         context.clearRect(0, 0, element.width, element.height);
-                        draw();
-                    },
-
-                    draw = function () {
-                        context.beginPath();
-                        context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-                        context.fillStyle = color;
-                        context.fill();
-                        radius += 2;
-                        if (radius < element.width) {
-                            requestAnimFrame(draw);
-                        }
-                    };
-
-            init();
+                    }
+                };
+                const press = function (event) {
+                    element=event.srcElement;
+                    start = new Date().getTime();
+                    //element = event.toElement;
+                    context = element.getContext('2d');
+                    radius = 0;
+                    centerX = event.targetTouches[0].clientX-$(element).offset().left;
+                    centerY = event.targetTouches[0].clientY-$(element).offset().top;
+                    isTouch=true;
+                    context.clearRect(0, 0, element.width, element.height);
+                    context.beginPath();
+                    draw();
+                };
+                const containers = Array.prototype.slice.call(document.getElementsByClassName(dom));
+                for (var i = 0; i < containers.length; i += 1) {
+                    let canvas = document.createElement('canvas');
+                    canvas.addEventListener('touchstart', press, false);
+                    canvas.addEventListener('touchend', touchEnd, false);
+                    containers[i].appendChild(canvas);
+                    canvas.width  = canvas.offsetWidth;canvas.height = canvas.offsetHeight;
+                }
+            };
+            waterRipple("card_item_body","#b3e646",4);
+            //注册遮蔽罩点击事件
+            $(".cover").click(function (e) {
+                switch (e.target.innerHTML){
+                    case "删除":$("#item4").empty();$("#item4").css("border","none");$("#item4").css("min-height","0");break;
+                    case "转发":alert("转发成功!");break;
+                    //default: this.style.display="none";break;
+                }
+                this.style.display="none";
+            })
         })
     </script>
 </body>
