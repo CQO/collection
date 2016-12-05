@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0"/>
     <title>Collection</title>
     <link rel="stylesheet" href="css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="css/x0popup.min.css">
 </head>
 <style>
     html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
     body{
         Font-family: Helvetica, Tahoma, Arial, STXihei, “华文细黑”, “Microsoft YaHei”, “微软雅黑”, sans-serif;
-        background-color: #f1eef5;
         -webkit-overflow-scrolling: touch;
         overflow-scrolling: touch;
         -webkit-user-select: none;
@@ -23,7 +22,7 @@
         transform: translate3d(0, 0, 0);
     }
     section{
-        background-color: #f1eef5;
+        background-color: #b0c2ce;
         width: 100%;
         overflow: auto;
         position: absolute;
@@ -34,23 +33,19 @@
         height: 35px;
     }
     header{
-        position: absolute;
-        top: 0;
         width: 100%;
-        z-index: 999;
-        background-color: #f1eef5;
-        opacity: 0.9;
+        background-color: #b0c2ce;
     }
     header .seach{
-        margin: 5px;
+        margin: 4px;
         overflow: hidden;
     }
     header input{
         height: 25px;
         font-size: 0.8rem;
-        width: calc(100% - 3px);
-        border-radius: 10px;
-        border:0;
+        width: calc(100% - 2px);
+        border-radius: 3px;
+        border: 0;
     }
     .search_button{
         position: absolute;
@@ -62,12 +57,11 @@
         min-height: 100px;
         background-color: white;
         margin: 4px;
-        border: 1px solid #c5c5b8;
         transition: min-height 0.5s;
     }
     .card_item_header{
         margin: 0 5px;
-        padding: 3px 0;
+        padding: 1px 0;
         border-bottom: 1px solid #b4b1b7;
     }
     .card_item_header img{
@@ -93,6 +87,7 @@
     .card_item_body{
         margin: 5px;
         position: relative;
+        padding-bottom: 4px;
     }
     .card_item_body img{
         max-width: 97%;
@@ -101,45 +96,45 @@
         background: #fff;
     }
     .card_item_body .file{
-        height: 80px;
+        height: 60px;
         border: 1px solid #d4e9ec;
         border-radius: 10px;
         padding: 0 7px;
-        line-height: 90px;
+        line-height: 60px;
         color: #b3b366;
         background-color: #eefbfb;
     }
     .card_item_body .file .file_box{
         border-right: 3px solid #a4c8ce;
-        padding: 5px;
+        padding: 3px;
         padding-right: 10px;
-        font-size: 4rem;
+        font-size: 3rem;
         position: relative;
         top: 3px;
         float: left;
     }
     .card_item_body .file .file_title{
         float: left;
-        font-size: 1.2rem;
+        font-size: 1.0rem;
         position: relative;
-        top: 0;
+        top: -5px;
         left: 15px;
         color: #4a4a4a;
-        line-height: 80px;
+        line-height: 60px;
         font-weight: bold;
         user-select: none;
     }
     .card_item_body .file .file_size{
         float: right;
         line-height: 1.0rem;
-        font-size: 1.0rem;
+        font-size: 0.8rem;
         position: absolute;
-        top: 62px;
-        right: 0;
+        top: 40px;
+        left: 80px;
         color: #d0c6c6;
         z-index: 1;
         width: 70px;
-        text-align: center;
+        text-align: left;
         user-select: none;
     }
     .card_item_body .file .fa-cloud-download{
@@ -203,14 +198,14 @@
 
 </style>
 <body>
-    <header>
-        <div class="seach">
-            <input type="text" id="search" placeholder="输入搜索内容">
-            <div class="search_button fa fa-search"></div>
-        </div>
-    </header>
+
     <section id="box" class="box">
-        <div class="zhanwei"></div>
+        <header>
+            <div class="seach">
+                <input type="text" id="search" placeholder="搜索 文章内容/用户名">
+                <div class="search_button fa fa-search"></div>
+            </div>
+        </header>
         <ul class="card">
             <li id="item1" class="card_item">
                 <div class="card_item_header">
@@ -226,7 +221,7 @@
             <li id="item2" class="card_item">
                 <div class="card_item_header">
                     <img src="img/1.png">
-                    <span class="name">网易</span>
+                    <span class="name">李晨</span>
                     <span class="time">16/03/18</span>
                     <div class="clear"></div>
                 </div>
@@ -242,7 +237,7 @@
             <li id="item3" class="card_item">
                 <div class="card_item_header">
                     <img src="img/1.png">
-                    <span class="name">网易</span>
+                    <span class="name">王刚</span>
                     <span class="time">16/03/18</span>
                     <div class="clear"></div>
                 </div>
@@ -258,7 +253,7 @@
             <li id="item4" class="card_item">
                 <div class="card_item_header">
                     <img src="img/1.png">
-                    <span class="name">网易</span>
+                    <span class="name">风雨过</span>
                     <span class="time">16/03/18</span>
                     <div class="clear"></div>
                 </div>
@@ -272,7 +267,7 @@
             <li id="item5" class="card_item">
                 <div class="card_item_header">
                     <img src="img/1.png">
-                    <span class="name">网易</span>
+                    <span class="name">武夷山</span>
                     <span class="time">16/03/18</span>
                     <div class="clear"></div>
                 </div>
@@ -288,7 +283,7 @@
             <li id="item6" class="card_item">
                 <div class="card_item_header">
                     <img src="img/1.png">
-                    <span class="name">网易</span>
+                    <span class="name">阳台上</span>
                     <span class="time">16/03/18</span>
                     <div class="clear"></div>
                 </div>
@@ -329,13 +324,11 @@
         </div>
     </footer>
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="js/prefixfree.min.js"></script>
+    <script type="text/javascript" src="js/x0popup.min.js"></script>
     <script>
-
+        let touchDom;
         $(function () {
             let context = {},isTouch=false,start;
-
-
             const waterRipple=function (dom,color,increment) {
                 let centerX = 0, centerY = 0,  element = {}, radius = 0;
                 function touchEnd(event) {
@@ -361,7 +354,6 @@
                         }
                         else {
                             context.clearRect(0, 0, element.width, element.height);
-                            console.log("sd");
                             $(".cover").css("display","block");
                         }
                     }
@@ -371,6 +363,8 @@
                 };
                 const press = function (event) {
                     //event.preventDefault();
+                    //记录下点击的项目以供后续处理
+                    touchDom=event.target.parentNode.parentNode;
                     element=event.srcElement;
                     start = new Date().getTime();
                     //element = event.toElement;
@@ -397,8 +391,8 @@
             //注册遮蔽罩点击事件
             $(".cover").click(function (e) {
                 switch (e.target.innerHTML){
-                    case "删除":$("#item4").empty();$("#item4").css("border","none");$("#item4").css("min-height","0");break;
-                    case "转发":alert("转发成功!");break;
+                    case "删除":delate();break;
+                    case "转发":translate();break;
                 }
                 $(".cover").css("display","none");
             });
@@ -411,17 +405,66 @@
                 const val = $(this).val();
                 if(val!==null&&val!==""){
                     $(".card_item").css("display","none");
+                    //------------------------------------------搜索事件------------------------------------------
+                    //搜索人名
+                    $(".name").each(function () {
+                        if($(this).text().indexOf(val)>=0){
+                            $(this).parent().parent().css("display","block");
+                        }
+                    });
+                    //搜索文章内容
                     $(".text").each(function () {
                         if($(this).text().indexOf(val)>=0){
                             $(this).parent().parent().css("display","block");
                         }
                     });
+
                 }
                 else {
                     $(".card_item").css("display","block");
                 }
             });
-        })
+        });
+        //删除按钮点击执行的操作
+        function delate() {
+            x0p({
+                title: '删除确认',
+                text: '你真的想要删除这篇收藏吗?',
+                animationType: 'slideUp',
+                icon: 'warning',
+                buttons: [
+                    {
+                        type: 'ok',
+                        text: '确定'
+                    },
+                    {
+                        type: 'no',
+                        text: '放弃'
+                    }
+                ]
+            }, function(button) {
+                if(button==="ok"){
+                    const dom =$("#"+touchDom.id);
+                    dom.empty();
+                    dom.css("border","none");
+                    dom.css("min-height","0");
+                    x0p({
+                        title: '提示',
+                        text: '收藏已被删除!',
+                        overlayAnimation: false
+                    });
+                }
+
+            });
+        }
+        //分享按钮点击事件
+        function translate() {
+            x0p({
+                title: '提示',
+                text: '转发成功!',
+                overlayAnimation: false
+            });
+        }
     </script>
 </body>
 </html>
