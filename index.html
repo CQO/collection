@@ -11,29 +11,52 @@
     html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
     body{
         Font-family: Helvetica, Tahoma, Arial, STXihei, “华文细黑”, “Microsoft YaHei”, “微软雅黑”, sans-serif;
+        background-color: #f1eef5;
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-transform:translate3d(0, 0, 0)
+        transform: translate3d(0, 0, 0);
     }
     section{
         background-color: #f1eef5;
         width: 100%;
         overflow: auto;
-        top: 0;
         position: absolute;
         bottom: 0;
+        top: 0;
+    }
+    .zhanwei{
+        height: 35px;
     }
     header{
-        background: linear-gradient(#003658, #075a8e);
-        height: 50px;
-        line-height: 50px;
-        color: white;
-        overflow: hidden;
-        min-width: 300px;
-        box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1), 0 7px 8px 0 rgba(0,0,0,0.2);
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+        background-color: #f1eef5;
+        opacity: 0.9;
     }
-    header .fa-angle-left{
-        float: left;
-        font-size: 200%;
-        padding: 9px 15px;
-        font-weight: bold;
+    header .seach{
+        margin: 5px;
+        overflow: hidden;
+    }
+    header input{
+        height: 25px;
+        font-size: 0.8rem;
+        width: calc(100% - 3px);
+        border-radius: 10px;
+        border:0;
+    }
+    .search_button{
+        position: absolute;
+        right: 13px;
+        top: 10px;
+        color: darkgrey;
     }
     .card_item{
         min-height: 100px;
@@ -104,6 +127,7 @@
         color: #4a4a4a;
         line-height: 80px;
         font-weight: bold;
+        user-select: none;
     }
     .card_item_body .file .file_size{
         float: right;
@@ -116,6 +140,7 @@
         z-index: 1;
         width: 70px;
         text-align: center;
+        user-select: none;
     }
     .card_item_body .file .fa-cloud-download{
         font-size: 3rem;
@@ -126,6 +151,7 @@
         top: 10px;
         right: 8px;
         z-index: 9;
+        user-select: none;
     }
     .card_item_body .text {
         line-height: 1.2em;
@@ -147,7 +173,7 @@
         height: 100%;
         background-color: rgba(0, 0, 0, 0.41);
         position: absolute;
-        z-index: 10;
+        z-index: 999;
         display: none;
     }
     .clear{clear: both;}
@@ -174,9 +200,17 @@
     .delate{
         color: red;
     }
+
 </style>
 <body>
+    <header>
+        <div class="seach">
+            <input type="text" id="search" placeholder="输入搜索内容">
+            <div class="search_button fa fa-search"></div>
+        </div>
+    </header>
     <section id="box" class="box">
+        <div class="zhanwei"></div>
         <ul class="card">
             <li id="item1" class="card_item">
                 <div class="card_item_header">
@@ -297,62 +331,46 @@
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/prefixfree.min.js"></script>
     <script>
-<<<<<<< HEAD
 
         $(function () {
             let context = {},isTouch=false,start;
-            function touchEnd() {
-                var end = new Date().getTime();//接受时间
-                isTouch=false;
-                if(end - start>1000){
-                    $(".cover").css("display","block");
-                }
-            }
+
+
             const waterRipple=function (dom,color,increment) {
                 let centerX = 0, centerY = 0,  element = {}, radius = 0;
+                function touchEnd(event) {
+                    //event.preventDefault();
+                    isTouch=false;
+                }
+                function touchMove(event) {
+                    //event.preventDefault();
+                    isTouch=false;
+                }
                 const requestAnimFrame = function () {
                     return (window.requestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function (callback) {
                         window.setTimeout(callback, 1000 / 60);
                     });
-=======
-        let initX,moveX,X = 0,objX = 0;
-        var start;
-        $(".card_item").on("touchstart",function (event) {
-            start = new Date().getTime();
-        });
-        $(".card_item").on("touchend",function (event) {
-            var end = new Date().getTime();//接受时间
-            console.log ((end - start)+"ms");//返回函数执行需要时间
-        });
-        $(function () {
-
-            function waterRipple(dom,color) {
-                let centerX = 0, centerY = 0, context = {}, element = {}, radius = 0;
-                const requestAnimFrame = function () {
-                    return (
-                            window.requestAnimationFrame       ||
-                            window.mozRequestAnimationFrame    ||
-                            window.oRequestAnimationFrame      ||
-                            window.msRequestAnimationFrame     ||
-                            function (callback) {
-                                window.setTimeout(callback, 1000 / 60);
-                            }
-                    );
->>>>>>> origin/master
                 } ();
                 const draw = function () {
-                    context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-                    context.fillStyle = color;
-<<<<<<< HEAD
-                    context.fill();radius += increment ;
-                    if (radius < element.width&&isTouch) {
-                        requestAnimFrame(draw);
+                    if(isTouch){
+                        context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                        context.fillStyle = color;
+                        context.fill();radius += increment ;
+                        if (radius < element.width&&isTouch) {
+                            requestAnimFrame(draw);
+                        }
+                        else {
+                            context.clearRect(0, 0, element.width, element.height);
+                            console.log("sd");
+                            $(".cover").css("display","block");
+                        }
                     }
                     else {
                         context.clearRect(0, 0, element.width, element.height);
                     }
                 };
                 const press = function (event) {
+                    //event.preventDefault();
                     element=event.srcElement;
                     start = new Date().getTime();
                     //element = event.toElement;
@@ -361,53 +379,48 @@
                     centerX = event.targetTouches[0].clientX-$(element).offset().left;
                     centerY = event.targetTouches[0].clientY-$(element).offset().top;
                     isTouch=true;
-=======
-                    context.fill();
-                    radius += 4 ;
-                    if (radius < element.width) {
-                        requestAnimFrame(draw);
-                    }
-                };
-                const press = function (event) {
-                    element = event.toElement;
-                    context = element.getContext('2d');
-                    radius = 0;
-                    centerX = event.offsetX;
-                    centerY = event.offsetY;
->>>>>>> origin/master
                     context.clearRect(0, 0, element.width, element.height);
                     context.beginPath();
-                    draw();
+                    setTimeout(draw,100);
                 };
                 const containers = Array.prototype.slice.call(document.getElementsByClassName(dom));
                 for (var i = 0; i < containers.length; i += 1) {
                     let canvas = document.createElement('canvas');
-<<<<<<< HEAD
                     canvas.addEventListener('touchstart', press, false);
                     canvas.addEventListener('touchend', touchEnd, false);
+                    canvas.addEventListener('touchmove', touchMove, false);
                     containers[i].appendChild(canvas);
                     canvas.width  = canvas.offsetWidth;canvas.height = canvas.offsetHeight;
                 }
             };
-            waterRipple("card_item_body","#b3e646",4);
+            waterRipple("card_item_body","#b3e646",6);
             //注册遮蔽罩点击事件
             $(".cover").click(function (e) {
                 switch (e.target.innerHTML){
                     case "删除":$("#item4").empty();$("#item4").css("border","none");$("#item4").css("min-height","0");break;
                     case "转发":alert("转发成功!");break;
-                    //default: this.style.display="none";break;
                 }
-                this.style.display="none";
-            })
-=======
-                    canvas.addEventListener('click', press, false);
-                    containers[i].appendChild(canvas);
-                    canvas.width  = canvas.offsetWidth;
-                    canvas.height = canvas.offsetHeight;
+                $(".cover").css("display","none");
+            });
+            //注册input获取焦点事件
+            //$("input").focus(function(){
+                //$(".card_item").css("display","none");
+            //});
+            //注册input改变事件
+            $('input').bind('input propertychange', function() {
+                const val = $(this).val();
+                if(val!==null&&val!==""){
+                    $(".card_item").css("display","none");
+                    $(".text").each(function () {
+                        if($(this).text().indexOf(val)>=0){
+                            $(this).parent().parent().css("display","block");
+                        }
+                    });
                 }
-            }
-            waterRipple("card_item_body","#000206");
->>>>>>> origin/master
+                else {
+                    $(".card_item").css("display","block");
+                }
+            });
         })
     </script>
 </body>
