@@ -80,6 +80,12 @@ vrv.android = {
 	getVersionMark : function (a) {
 		android.getVersionMark(vrv.util.pre(a))
 	},
+    getAllNotes : function (a) {
+        android.getAllNotes(vrv.util.pre(a))
+    },
+    deleteNotes : function (a) {
+        android.deleteNotes(vrv.util.pre(a))
+    },
 	getReceiveTask : function (a) {
 		android.getReceiveTask(vrv.util.pre(a))
 	},
@@ -187,6 +193,12 @@ vrv.ios = {
 	getCompletedTask : function (a) {
 		vrv.util.callIOS("getCompletedTask", a)
 	},
+    getAllNotes : function (a) {
+        vrv.util.callIOS("getAllNotes", a)
+    },
+    deleteNotes : function (a) {
+        vrv.util.callIOS("deleteNotes", a)
+    },
 	getUserProfile : function (a) {
 		vrv.util.callIOS("getUserProfile", a)
 	}

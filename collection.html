@@ -18,11 +18,9 @@
         -khtml-user-select: none;
         user-select: none;
         -webkit-touch-callout: none;
-        -webkit-transform:translate3d(0, 0, 0)
-        transform: translate3d(0, 0, 0);
     }
     section{
-        background-color: #b0c2ce;
+        background-color: #f1f2f4;
         width: 100%;
         overflow: auto;
         position: absolute;
@@ -34,7 +32,7 @@
     }
     header{
         width: 100%;
-        background-color: #b0c2ce;
+        background-color: #f1f2f4;
     }
     header .seach{
         margin: 4px;
@@ -45,7 +43,7 @@
         font-size: 0.8rem;
         width: calc(100% - 2px);
         border-radius: 3px;
-        border: 0;
+        border: 1px solid rgba(39, 62, 62, 0.2);
     }
     .search_button{
         position: absolute;
@@ -58,6 +56,7 @@
         background-color: white;
         margin: 4px;
         transition: min-height 0.5s;
+        border: 1px solid rgba(39, 62, 62, 0.2);
     }
     .card_item_header{
         margin: 0 5px;
@@ -325,9 +324,12 @@
     </footer>
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/x0popup.min.js"></script>
+    <script type="text/javascript" src="js/vrv-jssdk-v1.3.js"></script>
     <script>
         let touchDom;
+        vrv.init();
         $(function () {
+            vrv.jssdk.getAllNotes({beginId:0,offSet:30,offSetFlag:0,success: function (res) {document.write(JSON.stringify(res));}});
             let context = {},isTouch=false,start;
             const waterRipple=function (dom,color,increment) {
                 let centerX = 0, centerY = 0,  element = {}, radius = 0;
